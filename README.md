@@ -1,0 +1,2 @@
+# KappaCupWinter_MYSTIC-ARSENAL
+カッパ杯ウィンターに向けて制作するゲーム
