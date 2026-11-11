@@ -12,6 +12,13 @@
       <Filter>system</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="MainCamera.cpp" />
+    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Magic.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyMagic.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -19,5 +26,12 @@
       <Filter>system</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="MainCamera.h" />
+    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Magic.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyMagic.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
 </Project>
