@@ -60,6 +60,9 @@ private:
 	int m_attackDamage = 1;
 	bool m_isHit = false;
 	bool m_isShot = false;
+	int m_killScore = 100;
+	int m_totalBonusScore = 0;//クリア時にリザルトで追加するボーナススコアの合計
+	int m_addBonusScore = 50;//敵を倒すごとに加算するボーナススコア
 
 };
 

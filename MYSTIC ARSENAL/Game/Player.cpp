@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Magic.h"
 #include "Game.h"
+#include "ScoreManager.h"
+
 
 Player::~Player()
 {
@@ -105,6 +107,13 @@ void Player::Shot()
 			se->Init(sound_Fire);
 		se->SetVolume(0.2f);
 		se->Play(false);
+
+		ScoreManager* score = FindGO<ScoreManager>("scoreManager");
+		if (score != nullptr)
+		{
+			score->AddMagicExp(ScoreManager::MAGIC_EXP_USE);
+
+		}
 
 	}
 }

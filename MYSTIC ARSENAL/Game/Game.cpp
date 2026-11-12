@@ -4,6 +4,8 @@
 #include "MainCamera.h"
 #include "BackGround.h"
 #include "Enemy.h"
+#include "TimeLimit.h"
+#include "ScoreManager.h"
 
 
 bool Game::Start()
@@ -19,6 +21,11 @@ bool Game::Start()
 		Enemy* enemy = NewGO<Enemy>(0, "enemy");
 		enemy->SetPosition(Vector3(100.0f + 400.0f * i, 0.0f, 0.0f));
 	}
+
+	timelimit = NewGO<TimeLimit>(0, "timeLImit");
+	FindGO<ScoreManager>("scoreManager")->StartRound();
+
+
 	
 	return true;
 }
@@ -26,6 +33,13 @@ bool Game::Start()
 void Game::Update()
 {
 	// g_renderingEngine->DisableRaytracing();
+	if (!m_isFinished && timelimit->IsTimeUp())
+	{
+		m_isFinished = true;
+		FindGO<ScoreManager>("scoreManager")->EndRound();
+
+
+	}
 	
 }
 

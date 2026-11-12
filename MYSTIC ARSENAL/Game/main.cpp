@@ -6,6 +6,7 @@
 
 //#include "Game.h"
 #include "Title.h"
+#include"ScoreManager.h"
 
 
 
@@ -34,8 +35,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
 
-	//Titleクラスのオブジェクトを作成。
+
+	//ScoreManagerクラスのオブジェクト作成
+	NewGO<ScoreManager>(0, "scoreManager");
+
+	//Titleクラスのオブジェクト作成。
 	NewGO<Title>(0, "title");
+
+	
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！

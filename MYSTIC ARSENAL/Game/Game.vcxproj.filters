@@ -19,6 +19,8 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMagic.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TimeLimit.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -33,5 +35,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMagic.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="TimeLimit.h" />
+    <ClInclude Include="ScoreManager.h" />
   </ItemGroup>
 </Project>

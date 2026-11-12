@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Magic.h"
 #include "Enemy.h"
+#include"ScoreManager.h"
 
 
 bool Magic::Start()
@@ -25,9 +26,15 @@ void Magic::Update()
 			Vector3 diff = enemy->GetPosition() - m_position;
 			diff.y += 50.0f;
 
-			if (diff.Length() < 60.0f)
+			if (diff.Length() < 70.0f)
 			{
 				enemy->Damage(1);
+				ScoreManager* score = FindGO<ScoreManager>("scoreManager");
+				if (score != nullptr)
+				{
+					score->AddMagicExp(ScoreManager::MAGIC_EXP_HIT);
+				}
+
 				m_isHit = true;
 
 				return false;

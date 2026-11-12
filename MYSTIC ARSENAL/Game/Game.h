@@ -2,10 +2,13 @@
 
 #include "Level3DRender/LevelRender.h"
 
+#include "TimeLimit.h"
+
+
 class Player;
 class MainCamera;
 class BackGround;
-
+class TimeLimit;
 
 enum EnSound
 {
@@ -28,9 +31,13 @@ private:
 	Player* player;
 	MainCamera* mainCamera;
 	BackGround* backGround;
+	TimeLimit* timelimit = nullptr;
 
 
 	ModelRender m_modelRender;
 	Vector3 m_pos;
+	bool m_isFinished = false;
+
+	
 };
 

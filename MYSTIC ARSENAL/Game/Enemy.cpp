@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "EnemyMagic.h"
+#include "ScoreManager.h"
 
 bool Enemy::Start()
 {
@@ -99,6 +100,12 @@ void Enemy::Damage(int damage)
 
 	if (m_hp <= 0)
 	{
+		ScoreManager* score = FindGO<ScoreManager>("scoreManager");
+		if (score != nullptr)
+		{
+			score->AddKillScore(m_killScore);
+		}
+
 		DeleteGO(this);
 	}
 }
