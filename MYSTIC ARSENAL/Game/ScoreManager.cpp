@@ -17,9 +17,10 @@ void ScoreManager::StartRound()
 	m_isPlaying = true;
 }
 
-void ScoreManager::EndRound()
+void ScoreManager::EndRound(int bonus)
 {
 	if (!m_isPlaying)return;
+	m_currentScore += bonus;
 	m_totalScore += m_currentScore;
 	m_isPlaying = false;
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TimeLimit.h"
+#include"Game.h"
 
 
 bool TimeLimit::Start()
@@ -13,6 +14,9 @@ bool TimeLimit::Start()
 
 void TimeLimit::Update()
 {
+	Game* game = FindGO<Game>("game");
+	if (game != nullptr && game->IsTimeStopped()) return;
+
 	if (!IsTimeUp())
 	{
 		m_remainingTime -= g_gameTime->GetFrameDeltaTime();

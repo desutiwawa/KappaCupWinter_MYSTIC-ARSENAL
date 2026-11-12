@@ -227,6 +227,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMagic.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="TimeLimit.cpp" />
     <ClCompile Include="Magic.cpp" />
     <ClCompile Include="main.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMagic.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="TimeLimit.h" />
     <ClInclude Include="Magic.h" />
     <ClInclude Include="MainCamera.h" />

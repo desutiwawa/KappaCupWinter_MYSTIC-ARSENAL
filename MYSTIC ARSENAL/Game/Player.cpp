@@ -36,6 +36,9 @@ void Player::Update()
 	swprintf_s(hpText, L"HP%d", hp);
 	fontRender.SetText(hpText);
 
+	Game* game = FindGO<Game>("game");
+	if (game != nullptr && game->IsTimeStopped()) return;
+
 	if (invincibleTimer > 0.0f)
 	{
 		invincibleTimer -= g_gameTime->GetFrameDeltaTime();

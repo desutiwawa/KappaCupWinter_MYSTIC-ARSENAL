@@ -6,6 +6,21 @@
 #include "Enemy.h"
 #include "TimeLimit.h"
 #include "ScoreManager.h"
+#include "Magic.h"
+#include "Result.h"
+
+
+Game::~Game()
+{
+	DeleteGO(player);
+	DeleteGO(mainCamera);
+	DeleteGO(backGround);
+	DeleteGO(timelimit);
+	QueryGOs<Enemy>("enemy", [](Enemy* e) {DeleteGO(e);return true;});
+	QueryGOs<Magic>("magic", [](Magic* m) {DeleteGO(m);return true;});
+
+
+}
 
 
 bool Game::Start()
@@ -21,7 +36,7 @@ bool Game::Start()
 		Enemy* enemy = NewGO<Enemy>(0, "enemy");
 		enemy->SetPosition(Vector3(100.0f + 400.0f * i, 0.0f, 0.0f));
 	}
-
+	
 	timelimit = NewGO<TimeLimit>(0, "timeLimit");
 	FindGO<ScoreManager>("scoreManager")->StartRound();
 
@@ -40,8 +55,31 @@ void Game::Update()
 
 
 	}
+
+	if (m_isFinished) return;
+
+	ScoreManager* score = FindGO<ScoreManager>("scoreManager");
+
+	if (player->IsDead())
+	{
+		m_isFinished = true;
+		m_isFinished = true;
+		score->EndRound();
+		Result* result = NewGO<Result>(10, "result");
+		result->SetGameOver(true);
+		return;
+	}
 	
+	if (timelimit->IsTimeUp())
+	{
+		m_isFinished = true;
+		score->EndRound();
+	}
+
+
 }
+
+
 
 void Game::Render(RenderContext& rc)
 {

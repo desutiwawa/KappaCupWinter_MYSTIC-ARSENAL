@@ -11,7 +11,7 @@ public:
 	void Render(RenderContext& rc);
 
 	void StartRound();
-	void EndRound();
+	void EndRound(int bonus = 0);
 
 	void AddKillScore(int score) { if (m_isPlaying)m_currentScore += score; }
 	void AddMagicExp(int exp) { if (m_isPlaying)m_magicExp += exp; }

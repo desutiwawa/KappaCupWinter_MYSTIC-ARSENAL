@@ -2,7 +2,7 @@
 #include "Magic.h"
 #include "Enemy.h"
 #include"ScoreManager.h"
-
+#include"Game.h"
 
 bool Magic::Start()
 {
@@ -14,6 +14,9 @@ bool Magic::Start()
 
 void Magic::Update()
 {
+	Game* game = FindGO<Game>("game");
+	if (game != nullptr && game->IsTimeStopped()) return;
+
 	float dt = g_gameTime->GetFrameDeltaTime();
 	m_position += m_direction * m_speed * dt;
 	m_modelRender.SetPosition(m_position);

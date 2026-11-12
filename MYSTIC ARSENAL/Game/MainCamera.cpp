@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainCamera.h"
 #include "Player.h"
+#include "Game.h"
 
 
 bool MainCamera::Start()
@@ -16,6 +17,9 @@ bool MainCamera::Start()
 
 void MainCamera::Update()
 {
+	Game* game = FindGO<Game>("game");
+	if (game != nullptr && game->IsTimeStopped()) return;
+
 	Vector3 target = m_player->position;
 	target.y += 80.0f;
 

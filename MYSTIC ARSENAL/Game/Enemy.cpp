@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "EnemyMagic.h"
 #include "ScoreManager.h"
+#include "Game.h"
 
 bool Enemy::Start()
 {
@@ -16,6 +17,8 @@ bool Enemy::Start()
 
 void Enemy::Update()
 {
+	Game* game = FindGO<Game>("game");
+	if (game != nullptr && game->IsTimeStopped()) return;
 	if (m_player == nullptr) return;
 
 	m_moveSpeed.x = 0.0f;

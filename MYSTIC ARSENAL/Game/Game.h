@@ -20,11 +20,11 @@ class Game : public IGameObject
 {
 public:
 	Game() {}
-	~Game() {}
+	~Game();
 	bool Start();
 	void Update();
 	void Render(RenderContext& rc);
-
+	bool IsTimeStopped() const { return m_isTimeStopped; }
 	
 
 private:
@@ -37,7 +37,7 @@ private:
 	ModelRender m_modelRender;
 	Vector3 m_pos;
 	bool m_isFinished = false;
-
+	bool m_isTimeStopped = false;
 	
 };
 

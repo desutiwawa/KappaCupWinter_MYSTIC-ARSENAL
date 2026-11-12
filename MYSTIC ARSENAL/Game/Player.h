@@ -44,6 +44,7 @@ public:
 	int hp = 10;
 	int mp = 100;
 	float invincibleTimer = 0.0f;
+	bool IsDead() const { return hp <= 0; }
 
 };
 
