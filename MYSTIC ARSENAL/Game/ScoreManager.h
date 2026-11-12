@@ -18,7 +18,7 @@ public:
 
 	int GetTotalScore() const { return m_totalScore; }
 	int GetCurrntScore() const { return m_currentScore; }
-	int GetMagicExp() const { m_magicExp; }
+	int GetMagicExp() const { return m_magicExp; }
 
 
 private:
