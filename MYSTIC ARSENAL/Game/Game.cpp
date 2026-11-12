@@ -22,7 +22,7 @@ bool Game::Start()
 		enemy->SetPosition(Vector3(100.0f + 400.0f * i, 0.0f, 0.0f));
 	}
 
-	timelimit = NewGO<TimeLimit>(0, "timeLImit");
+	timelimit = NewGO<TimeLimit>(0, "timeLimit");
 	FindGO<ScoreManager>("scoreManager")->StartRound();
 
 

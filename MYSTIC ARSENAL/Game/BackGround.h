@@ -14,5 +14,9 @@ private:
 	ModelRender modelRender;
 	PhysicsStaticObject physicsStaticObject;
 
+	ModelRender m_skyRender;
+	Texture m_skyTexture;
+	float m_skyLuminance = 1.0f;
+
 };
 
