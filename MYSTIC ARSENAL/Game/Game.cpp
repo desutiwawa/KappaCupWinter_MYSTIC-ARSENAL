@@ -48,13 +48,7 @@ bool Game::Start()
 void Game::Update()
 {
 	// g_renderingEngine->DisableRaytracing();
-	if (!m_isFinished && timelimit->IsTimeUp())
-	{
-		m_isFinished = true;
-		FindGO<ScoreManager>("scoreManager")->EndRound();
-
-
-	}
+	
 
 	if (m_isFinished) return;
 
@@ -63,7 +57,7 @@ void Game::Update()
 	if (player->IsDead())
 	{
 		m_isFinished = true;
-		m_isFinished = true;
+		m_isTimeStopped = true;
 		score->EndRound();
 		Result* result = NewGO<Result>(10, "result");
 		result->SetGameOver(true);
@@ -73,7 +67,11 @@ void Game::Update()
 	if (timelimit->IsTimeUp())
 	{
 		m_isFinished = true;
-		score->EndRound();
+		m_isTimeStopped = true;
+		score->EndRound(score->GetBonusScore());
+		Result* result = NewGO<Result>(10, "result");
+		result->SetGameOver(false);
+
 	}
 
 

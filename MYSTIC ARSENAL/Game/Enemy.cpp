@@ -107,6 +107,9 @@ void Enemy::Damage(int damage)
 		if (score != nullptr)
 		{
 			score->AddKillScore(m_killScore);
+
+			score->AddBonusScore(m_addBonusScore);
+
 		}
 
 		DeleteGO(this);

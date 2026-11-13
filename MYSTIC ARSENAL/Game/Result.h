@@ -14,15 +14,28 @@ public:
 
 
 private:
+
+	float m_timer = 0.0f;
+	float m_fadeTime = 1.0f;
+	bool m_isGameOver = false;
+
+	//ゲームオーバー用
 	SpriteRender m_black;
 	FontRender m_titleFont;
 	FontRender m_scoreFont;
 	FontRender m_totalFont;
 	FontRender m_pressFont;
-	float m_timer = 0.0f;
-	float m_fadeTime = 1.0f;
-	bool m_isGameOver = false;
 
 
+	//ゲームクリア用
+	SpriteRender m_clearBg;
+	SpriteRender m_pressA;
+	FontRender m_bonusFont;
+
+
+
+
+
+	
 };
 

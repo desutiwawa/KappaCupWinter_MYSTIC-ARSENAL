@@ -20,6 +20,8 @@ public:
 	int GetCurrntScore() const { return m_currentScore; }
 	int GetMagicExp() const { return m_magicExp; }
 
+	void AddBonusScore(int score) { if (m_isPlaying)m_bonusScore += score; }
+	int GetBonusScore()const { return m_bonusScore; }
 
 private:
 	FontRender m_fontRender;
@@ -27,6 +29,7 @@ private:
 	int m_currentScore = 0;
 	int m_magicExp = 0;
 	bool m_isPlaying = false;
+	int m_bonusScore = 0;
 
 };
 

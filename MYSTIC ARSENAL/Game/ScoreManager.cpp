@@ -12,6 +12,7 @@ bool ScoreManager::Start()
 
 void ScoreManager::StartRound()
 {
+	m_bonusScore = 0;
 	m_currentScore = 0;
 	m_magicExp = 0;
 	m_isPlaying = true;
