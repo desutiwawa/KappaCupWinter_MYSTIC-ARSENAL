@@ -40,6 +40,9 @@ public:
 	Vector3 position;
 	Vector3 moveSpeed;
 	Quaternion rotation;
+	SpriteRender m_hpFrame;   // HPバーの枠
+	SpriteRender m_hpBar;     // HPバー本体
+	int maxHp = 10;           // 最大HP(バーの長さの計算に使う)
 
 	int hp = 10;
 	int mp = 100;

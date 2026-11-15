@@ -22,19 +22,24 @@ bool Player::Start()
 	//modelRender.Init("Assets/modelData/");
 	characterController.Init(25.0f, 50.0f, position);
 
-	fontRender.SetPosition(-760.0f, -430.0f, 0.0f);
-	fontRender.SetScale(1.0f);
+	fontRender.SetPosition(-905.0f, -400.0f, 0.0f);
+	fontRender.SetScale(0.9f);
 
+	m_hpFrame.Init("Assets/sprite/hp_frame.dds", 512.0f, 64.0f);
+	m_hpFrame.SetPosition(Vector3(-660.0f, -470.0f, 0.0f));
+	m_hpFrame.Update();
 
+	// HPバー本体
+	m_hpBar.Init("Assets/sprite/hp_bar.dds", 448.0f, 36.0f);
+	m_hpBar.SetPivot(Vector2(0.0f, 0.5f));                    // 基準を「左端の真ん中」にする
+	m_hpBar.SetPosition(Vector3(-884.0f, -470.0f, 0.0f));     // 枠の内側の左端
+	m_hpBar.Update();
 
 	return true;
 }
 
 void Player::Update()
 {
-	wchar_t hpText[32];
-	swprintf_s(hpText, L"HP%d", hp);
-	fontRender.SetText(hpText);
 
 	Game* game = FindGO<Game>("game");
 	if (game != nullptr && game->IsTimeStopped()) return;
@@ -55,7 +60,14 @@ void Player::Update()
 	}
 	else {}
 
+	wchar_t hpText[32];
+	swprintf_s(hpText, L"HP %d / %d", hp, maxHp);
+	fontRender.SetText(hpText);
 
+	// HPの割合(0.0〜1.0)をバーの横の拡大率にする
+	float ratio = (float)hp / (float)maxHp;
+	m_hpBar.SetScale(Vector3(ratio, 1.0f, 1.0f));
+	m_hpBar.Update();
 
 }
 
@@ -93,6 +105,7 @@ void Player::Move()
 
 void Player::Shot()
 {
+	if (mp < 10)return;
 	if (g_pad[0]->IsTrigger(enButtonB))
 		//if (g_pad[0]->IsTrigger(enButtonRB1))
 	{
@@ -139,9 +152,15 @@ void Player::Damage(int damage)
 
 void Player::Render(RenderContext& rc)
 {
+	
+	m_hpFrame.Draw(rc);
+	m_hpBar.Draw(rc);
 	fontRender.Draw(rc);
 	modelRender.Draw(rc);
-
+	
+	
+	
+	
 }
 
 
