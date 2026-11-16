@@ -22,6 +22,7 @@
     <ClCompile Include="TimeLimit.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="Reticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -39,5 +40,6 @@
     <ClInclude Include="TimeLimit.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="Reticle.h" />
   </ItemGroup>
 </Project>

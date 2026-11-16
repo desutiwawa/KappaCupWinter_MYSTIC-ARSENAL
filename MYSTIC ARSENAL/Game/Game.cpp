@@ -9,6 +9,7 @@
 #include "ScoreManager.h"
 #include "Magic.h"
 #include "Result.h"
+#include "Reticle.h"
 
 
 namespace
@@ -49,6 +50,9 @@ bool Game::Start()
 	}
 	
 	timelimit = NewGO<TimeLimit>(0, "timeLimit");
+	reticle = NewGO<Reticle>(0, "reticle");
+
+
 	FindGO<ScoreManager>("scoreManager")->StartRound();
 
 
@@ -148,4 +152,5 @@ bool Game::IsSpawnablePosition(const Vector3& pos) const
 void Game::Render(RenderContext& rc)
 {
 	//m_modelRender.Draw(rc);
+	
 }

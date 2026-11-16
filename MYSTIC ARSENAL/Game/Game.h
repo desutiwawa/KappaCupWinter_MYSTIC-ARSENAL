@@ -9,6 +9,7 @@ class Player;
 class MainCamera;
 class BackGround;
 class TimeLimit;
+class Reticle;
 
 enum EnSound
 {
@@ -32,6 +33,8 @@ private:
 	MainCamera* mainCamera;
 	BackGround* backGround;
 	TimeLimit* timelimit = nullptr;
+	Reticle* reticle;
+	SpriteRender m_spriteRender;
 
 
 	ModelRender m_modelRender;
