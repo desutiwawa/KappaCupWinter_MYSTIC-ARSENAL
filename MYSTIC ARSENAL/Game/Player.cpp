@@ -22,24 +22,40 @@ bool Player::Start()
 	//modelRender.Init("Assets/modelData/");
 	characterController.Init(25.0f, 50.0f, position);
 
-	fontRender.SetPosition(-905.0f, -400.0f, 0.0f);
+	fontRender.SetPosition(-905.0f, -240.0f, 0.0f);
 	fontRender.SetScale(0.9f);
 
 	m_hpFrame.Init("Assets/sprite/hp_frame.dds", 512.0f, 64.0f);
-	m_hpFrame.SetPosition(Vector3(-660.0f, -470.0f, 0.0f));
+	m_hpFrame.SetPosition(Vector3(-660.0f, -310.0f, 0.0f));
 	m_hpFrame.Update();
 
 	// HPバー本体
 	m_hpBar.Init("Assets/sprite/hp_bar.dds", 448.0f, 36.0f);
 	m_hpBar.SetPivot(Vector2(0.0f, 0.5f));                    // 基準を「左端の真ん中」にする
-	m_hpBar.SetPosition(Vector3(-884.0f, -470.0f, 0.0f));     // 枠の内側の左端
+	m_hpBar.SetPosition(Vector3(-884.0f, -310.0f, 0.0f));     // 枠の内側の左端
 	m_hpBar.Update();
+
+
+	//MP
+	mpFontRender.SetPosition(-905.0f, -360.0f, 0.0f);
+	mpFontRender.SetScale(0.9f);
+
+	m_mpFrame.Init("Assets/sprite/mp_frame.dds", 512.0f, 64.0f);
+	m_mpFrame.SetPosition(Vector3(-660.0f, -430.0f, 0.0f));
+	m_mpFrame.Update();
+
+	m_mpBar.Init("Assets/sprite/mp_bar.dds", 448.0f, 36.0f);
+	m_mpBar.SetPivot(Vector2(0.0f, 0.5f));
+	m_mpBar.SetPosition(Vector3(-884.0f, -430.0f, 0.0f));
+	m_mpBar.Update();
 
 	return true;
 }
 
 void Player::Update()
 {
+
+	UpdateUI();
 
 	Game* game = FindGO<Game>("game");
 	if (game != nullptr && game->IsTimeStopped()) return;
@@ -51,8 +67,25 @@ void Player::Update()
 	}
 
 	modelRender.Update();
+
 	Move();
 	Shot();
+	if (mp < maxMp)
+	{
+		mpRecoverTimer += mpRecover * g_gameTime->GetFrameDeltaTime();
+		while (mpRecoverTimer >= 1.0f && mp < maxMp)
+		{
+			mp++;
+			mpRecoverTimer -= 1.0f;
+		}
+	}
+	else
+	{
+		mpRecoverTimer = 0.0f;
+	}
+
+
+
 	if (characterController.IsOnGround() == false)
 	{
 		moveSpeed.y -= 50.0f;
@@ -60,16 +93,32 @@ void Player::Update()
 	}
 	else {}
 
-	wchar_t hpText[32];
-	swprintf_s(hpText, L"HP %d / %d", hp, maxHp);
-	fontRender.SetText(hpText);
-
-	// HPの割合(0.0〜1.0)をバーの横の拡大率にする
-	float ratio = (float)hp / (float)maxHp;
-	m_hpBar.SetScale(Vector3(ratio, 1.0f, 1.0f));
-	m_hpBar.Update();
+	
 
 }
+
+
+void Player::UpdateUI()
+{
+	wchar_t text[32];
+
+	// HP
+	swprintf_s(text, L"HP %d / %d", hp, maxHp);
+	fontRender.SetText(text);
+	m_hpBar.SetScale(Vector3((float)hp / (float)maxHp, 1.0f, 1.0f));
+	m_hpBar.Update();
+
+	// MP
+	swprintf_s(text, L"MP %d / %d", mp, maxMp);
+	mpFontRender.SetText(text);
+	m_mpBar.SetScale(Vector3((float)mp / (float)maxMp, 1.0f, 1.0f));
+	m_mpBar.Update();
+
+
+}
+
+
+
 
 void Player::Move()
 {
@@ -156,10 +205,13 @@ void Player::Render(RenderContext& rc)
 	m_hpFrame.Draw(rc);
 	m_hpBar.Draw(rc);
 	fontRender.Draw(rc);
+
+	m_mpFrame.Draw(rc);
+	m_mpBar.Draw(rc);
+	mpFontRender.Draw(rc);
+
+
 	modelRender.Draw(rc);
-	
-	
-	
 	
 }
 

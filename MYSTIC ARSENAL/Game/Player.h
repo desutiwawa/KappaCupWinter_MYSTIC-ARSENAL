@@ -44,10 +44,20 @@ public:
 	SpriteRender m_hpBar;     // HPバー本体
 	int maxHp = 10;           // 最大HP(バーの長さの計算に使う)
 
+	FontRender mpFontRender;  // MPの文字
+	SpriteRender m_mpFrame;   // MPバーの枠
+	SpriteRender m_mpBar;     // MPバー本体
+	int maxMp = 100;          // 最大MP
+	float mpRecover = 15.0f;  // 1秒あたりのMP回復量
+	float mpRecoverTimer = 0.0f;
+
+	void UpdateUI();
+
 	int hp = 10;
 	int mp = 100;
 	float invincibleTimer = 0.0f;
 	bool IsDead() const { return hp <= 0; }
+	
 
 };
 
