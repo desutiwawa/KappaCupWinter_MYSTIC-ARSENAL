@@ -14,6 +14,7 @@ class Reticle;
 enum EnSound
 {
 	sound_Fire = 0,
+	sound_BGM = 1,
 
 };
 
@@ -35,6 +36,7 @@ private:
 	TimeLimit* timelimit = nullptr;
 	Reticle* reticle;
 	SpriteRender m_spriteRender;
+	SoundSource* m_bgm = nullptr;
 
 
 	ModelRender m_modelRender;

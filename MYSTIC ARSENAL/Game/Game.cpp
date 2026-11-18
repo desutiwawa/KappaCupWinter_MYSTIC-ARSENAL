@@ -30,6 +30,7 @@ Game::~Game()
 	QueryGOs<Enemy>("enemy", [](Enemy* e) {DeleteGO(e);return true;});
 	QueryGOs<Magic>("magic", [](Magic* m) {DeleteGO(m);return true;});
 
+	if (m_bgm != nullptr) DeleteGO(m_bgm);
 
 }
 
@@ -39,6 +40,11 @@ bool Game::Start()
 	srand((unsigned int)time(nullptr));
 	g_soundEngine->ResistWaveFileBank(sound_Fire, "Assets/sound/fire_shot.wav");
 
+	g_soundEngine->ResistWaveFileBank(sound_BGM, "Assets/sound/bgm_battle.wav");
+
+	
+
+
 
 	backGround = NewGO<BackGround>(0, "backGround");
 	player = NewGO<Player>(0,"player");
@@ -46,7 +52,7 @@ bool Game::Start()
 	for (int i = 0; i < 3; ++i)
 	{
 		Enemy* enemy = NewGO<Enemy>(0, "enemy");
-		enemy->SetPosition(Vector3(100.0f + 400.0f * i, 0.0f, 0.0f));
+		enemy->SetPosition(Vector3(1000.0f + 1400.0f * i, 0.0f, 0.0f));
 	}
 	
 	timelimit = NewGO<TimeLimit>(0, "timeLimit");
@@ -55,7 +61,10 @@ bool Game::Start()
 
 	FindGO<ScoreManager>("scoreManager")->StartRound();
 
-
+	m_bgm = NewGO<SoundSource>(0);
+	m_bgm->Init(sound_BGM);
+	m_bgm->SetVolume(0.2f);   // 効果音(0.2)とのバランスを見て調整
+	m_bgm->Play(true);
 	
 	return true;
 }
@@ -76,6 +85,7 @@ void Game::Update()
 		score->EndRound();
 		Result* result = NewGO<Result>(10, "result");
 		result->SetGameOver(true);
+		if (m_bgm != nullptr) m_bgm->Stop();
 		return;
 	}
 	
@@ -86,6 +96,7 @@ void Game::Update()
 		score->EndRound(score->GetBonusScore());
 		Result* result = NewGO<Result>(10, "result");
 		result->SetGameOver(false);
+		if (m_bgm != nullptr) m_bgm->Stop();
 
 	}
 
